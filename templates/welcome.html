@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome - AI Resume Screening System</title>
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <style>
+
+        html,
+        body {
+
+            margin: 0;
+            padding: 0;
+
+            width: 100%;
+            min-height: 100%;
+
+            background: #050a24 !important;
+
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        /* ==============================
+           NAVBAR
+           ============================== */
+
+        .navbar {
+
+            background: #070b29;
+
+            border-bottom: 1px solid #263b75;
+
+            padding: 16px 30px;
+
+        }
+
+
+        .navbar-brand {
+
+            color: #ffffff;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+        }
+
+
+        .navbar-brand:hover {
+
+            color: #ffffff;
+
+        }
+
+
+        /* ==============================
+           WELCOME SECTION
+           ============================== */
+
+        .welcome-section {
+
+            flex: 1;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 40px 20px;
+
+        }
+
+
+        .welcome-card {
+
+            width: 100%;
+
+            max-width: 750px;
+
+            background: #101735;
+
+            border: 1px solid #304b88;
+
+            border-radius: 15px;
+
+            padding: 55px 40px;
+
+            text-align: center;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+
+        }
+
+
+        /* ==============================
+           ROBOT ICON
+           ============================== */
+
+        .robot-circle {
+
+            width: 110px;
+
+            height: 110px;
+
+            margin: 0 auto 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #17234b;
+
+            border: 1px solid #304b88;
+
+            border-radius: 50%;
+
+        }
+
+
+        .robot-circle i {
+
+            color: #20c3df;
+
+            font-size: 55px;
+
+        }
+
+
+        /* ==============================
+           TITLE
+           ============================== */
+
+        .welcome-title {
+
+            color: #ffffff;
+
+            font-size: 38px;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .welcome-title span {
+
+            color: #20c3df;
+
+        }
+
+
+        /* ==============================
+           DESCRIPTION
+           ============================== */
+
+        .welcome-text {
+
+            color: #d7e5ff;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            max-width: 600px;
+
+            margin: 0 auto 30px;
+
+        }
+
+
+        /* ==============================
+           FEATURES
+           ============================== */
+
+        .features {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 32px;
+
+        }
+
+
+        .feature-box {
+
+            background: #111a3b;
+
+            border: 1px solid #304b88;
+
+            border-radius: 8px;
+
+            padding: 14px 18px;
+
+            min-width: 170px;
+
+        }
+
+
+        .feature-box i {
+
+            color: #20c3df;
+
+            margin-right: 7px;
+
+        }
+
+
+        .feature-box span {
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+        }
+
+
+        /* ==============================
+           LOGIN BUTTON
+           ============================== */
+
+        .login-btn {
+
+            display: inline-block;
+
+            background: #20c3df;
+
+            color: #061028;
+
+            border: none;
+
+            border-radius: 7px;
+
+            padding: 12px 32px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+        }
+
+
+        .login-btn:hover {
+
+            background: #19b5d0;
+
+            color: #061028;
+
+        }
+
+
+        .login-btn i {
+
+            margin-right: 7px;
+
+        }
+
+
+        /* ==============================
+           FOOTER
+           ============================== */
+
+        footer {
+
+            background: #070b29;
+
+            border-top: 1px solid #263b75;
+
+            color: #7185b5;
+
+            text-align: center;
+
+            padding: 12px;
+
+            font-size: 12px;
+
+        }
+
+
+        /* ==============================
+           MOBILE
+           ============================== */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                padding: 13px 15px;
+
+            }
+
+
+            .navbar-brand {
+
+                font-size: 14px;
+
+            }
+
+
+            .welcome-card {
+
+                padding: 40px 20px;
+
+            }
+
+
+            .welcome-title {
+
+                font-size: 28px;
+
+            }
+
+
+            .welcome-text {
+
+                font-size: 14px;
+
+            }
+
+
+            .robot-circle {
+
+                width: 90px;
+
+                height: 90px;
+
+            }
+
+
+            .robot-circle i {
+
+                font-size: 45px;
+
+            }
+
+
+            .feature-box {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         NAVBAR
+         ============================== -->
+
+    <nav class="navbar">
+
+        <a href="/"
+           class="navbar-brand">
+
+            🤖 AI Resume Screening System
+
+        </a>
+
+    </nav>
+
+
+
+    <!-- ==============================
+         WELCOME CONTENT
+         ============================== -->
+
+    <div class="welcome-section">
+
+
+        <div class="welcome-card">
+
+
+            <!-- Robot -->
+
+            <div class="robot-circle">
+
+                <i class="fa-solid fa-robot"></i>
+
+            </div>
+
+
+
+            <!-- Title -->
+
+            <h1 class="welcome-title">
+
+                Welcome to
+
+                <span>AI Resume Screening</span>
+
+            </h1>
+
+
+
+            <!-- Description -->
+
+            <p class="welcome-text">
+
+                An intelligent resume screening system that
+                analyzes candidate resumes and compares them
+                with job requirements to identify suitable
+                candidates efficiently.
+
+            </p>
+
+
+
+            <!-- Features -->
+
+            <div class="features">
+
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    <span>Resume Analysis</span>
+
+                </div>
+
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    <span>AI Matching</span>
+
+                </div>
+
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <span>Candidate Ranking</span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Login -->
+
+            <a href="{{ url_for('admin') }}"
+               class="login-btn">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Admin Login
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==============================
+         FOOTER
+         ============================== -->
+
+    <footer>
+
+        AI Resume Screening System
+
+    </footer>
+
+
+</body>
+
+</html>

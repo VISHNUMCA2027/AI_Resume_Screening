@@ -1,0 +1,561 @@
+/* =====================================================
+   AI RESUME SCREENING SYSTEM
+   DARK NAVY / CYAN THEME
+   COMMON CSS FOR ALL PAGES
+   ===================================================== */
+
+
+/* =====================================================
+   GLOBAL
+   ===================================================== */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100%;
+
+    background: #050a24 !important;
+    color: #ffffff !important;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* =====================================================
+   MAIN PAGE
+   ===================================================== */
+
+body {
+    background: #050a24 !important;
+    color: #ffffff !important;
+}
+
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
+
+.navbar {
+    background: #070b29 !important;
+
+    border-bottom: 1px solid #263b75 !important;
+}
+
+
+.navbar-brand {
+    color: #ffffff !important;
+
+    font-weight: bold;
+}
+
+
+.navbar a {
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   HEADINGS
+   ===================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #ffffff !important;
+}
+
+
+p {
+    color: #d7e5ff;
+}
+
+
+/* =====================================================
+   COMMON CARD
+   ===================================================== */
+
+.card {
+    background: #101735 !important;
+
+    color: #ffffff !important;
+
+    border: 1px solid #304b88 !important;
+
+    border-radius: 10px;
+}
+
+
+/* =====================================================
+   FORM LABEL
+   ===================================================== */
+
+label,
+.form-label {
+    color: #ffffff !important;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   INPUT
+   ===================================================== */
+
+.form-control,
+.form-select,
+textarea {
+    background: #111a3b !important;
+
+    border: 1px solid #304b88 !important;
+
+    color: #ffffff !important;
+}
+
+
+.form-control::placeholder,
+textarea::placeholder {
+    color: #8ea4d8 !important;
+}
+
+
+/* INPUT FOCUS */
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    background: #111a3b !important;
+
+    color: #ffffff !important;
+
+    border-color: #20c3df !important;
+
+    box-shadow: 0 0 0 2px rgba(32, 195, 223, 0.15) !important;
+}
+
+
+/* =====================================================
+   BUTTON - CYAN
+   ===================================================== */
+
+.btn-primary {
+    background: #20c3df !important;
+
+    border: none !important;
+
+    color: #061028 !important;
+
+    font-weight: bold;
+}
+
+
+.btn-primary:hover {
+    background: #19b5d0 !important;
+
+    color: #061028 !important;
+}
+
+
+/* =====================================================
+   CYAN BUTTON
+   ===================================================== */
+
+.btn-info {
+    background: #20c3df !important;
+
+    border: none !important;
+
+    color: #061028 !important;
+}
+
+
+/* =====================================================
+   HOME BUTTON
+   ===================================================== */
+
+.btn-light {
+    background: #101b40 !important;
+
+    border: 1px solid #30528d !important;
+
+    color: #ffffff !important;
+}
+
+
+.btn-light:hover {
+    background: #172653 !important;
+
+    color: #ffffff !important;
+}
+
+
+/* =====================================================
+   LOGOUT / DANGER BUTTON
+   ===================================================== */
+
+.btn-danger {
+    background: #ff4f73 !important;
+
+    border: none !important;
+
+    color: #ffffff !important;
+}
+
+
+.btn-danger:hover {
+    background: #ff365f !important;
+
+    color: #ffffff !important;
+}
+
+
+/* =====================================================
+   SUCCESS BUTTON
+   ===================================================== */
+
+.btn-success {
+    background: #20c3df !important;
+
+    border: none !important;
+
+    color: #061028 !important;
+}
+
+
+.btn-success:hover {
+    background: #19b5d0 !important;
+
+    color: #061028 !important;
+}
+
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.table {
+    background: #101735 !important;
+
+    color: #ffffff !important;
+
+    border-color: #304b88 !important;
+}
+
+
+.table thead th {
+    background: #17234b !important;
+
+    color: #20c3df !important;
+
+    border-color: #304b88 !important;
+
+    font-weight: bold;
+}
+
+
+.table tbody td {
+    background: #101735 !important;
+
+    color: #ffffff !important;
+
+    border-color: #304b88 !important;
+}
+
+
+.table tbody tr:hover td {
+    background: #141f43 !important;
+
+    color: #ffffff !important;
+}
+
+
+/* =====================================================
+   LINKS
+   ===================================================== */
+
+a {
+    color: #20c3df;
+}
+
+
+a:hover {
+    color: #62e6fa;
+}
+
+
+/* =====================================================
+   RESUME LINK
+   ===================================================== */
+
+.resume-link {
+    color: #20c3df !important;
+
+    text-decoration: none;
+}
+
+
+.resume-link:hover {
+    color: #62e6fa !important;
+
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   SELECTED STATUS
+   TEXT = WHITE
+   TICK = GREEN
+   ===================================================== */
+
+.status-selected {
+    color: #ffffff !important;
+
+    font-weight: 600;
+}
+
+
+.selected-tick {
+    color: #22c55e !important;
+
+    margin-right: 4px;
+}
+
+
+/* =====================================================
+   REJECTED STATUS
+   TEXT = WHITE
+   X = RED
+   ===================================================== */
+
+.status-rejected {
+    color: #ffffff !important;
+
+    font-weight: 600;
+}
+
+
+.rejected-icon {
+    color: #ff3b3b !important;
+
+    margin-right: 4px;
+}
+
+
+/* =====================================================
+   EDIT ICON
+   ===================================================== */
+
+.edit-icon {
+    color: #20c3df !important;
+}
+
+
+.edit-icon:hover {
+    color: #62e6fa !important;
+}
+
+
+/* =====================================================
+   DELETE ICON
+   ===================================================== */
+
+.delete-icon {
+    color: #20c3df !important;
+}
+
+
+.delete-icon:hover {
+    color: #ff3b3b !important;
+}
+
+
+/* =====================================================
+   ICONS
+   ===================================================== */
+
+.fa-file-pdf {
+    color: #20c3df;
+}
+
+
+.fa-search,
+.fa-magnifying-glass {
+    color: inherit;
+}
+
+
+/* =====================================================
+   ALERT
+   ===================================================== */
+
+.alert {
+    background: #101735 !important;
+
+    color: #ffffff !important;
+
+    border-color: #304b88 !important;
+}
+
+
+/* =====================================================
+   LOGIN / ADMIN BOX
+   ===================================================== */
+
+.login-card,
+.admin-card {
+    background: #101735 !important;
+
+    border: 1px solid #304b88 !important;
+
+    color: #ffffff !important;
+
+    border-radius: 12px;
+}
+
+
+/* =====================================================
+   LOGIN ICON
+   ===================================================== */
+
+.login-icon {
+    background: #17234b !important;
+
+    border: 1px solid #304b88 !important;
+}
+
+
+.login-icon i {
+    color: #20c3df !important;
+}
+
+
+/* =====================================================
+   SEARCH INPUT
+   ===================================================== */
+
+.search-input {
+    background: #111a3b !important;
+
+    border: 1px solid #304b88 !important;
+
+    color: #ffffff !important;
+}
+
+
+.search-input:focus {
+    background: #111a3b !important;
+
+    color: #ffffff !important;
+
+    border-color: #20c3df !important;
+
+    box-shadow: none !important;
+}
+
+
+/* =====================================================
+   SEARCH BUTTON
+   ===================================================== */
+
+.search-btn {
+    background: #20c3df !important;
+
+    border: none !important;
+
+    color: #061028 !important;
+
+    font-weight: bold;
+}
+
+
+.search-btn:hover {
+    background: #19b5d0 !important;
+
+    color: #061028 !important;
+}
+
+
+/* =====================================================
+   DASHBOARD STAT CARDS
+   ===================================================== */
+
+.stat-card {
+    background: #101735 !important;
+
+    border: 1px solid #304b88 !important;
+
+    color: #ffffff !important;
+
+    border-radius: 10px;
+}
+
+
+.stat-card h2,
+.stat-card h6 {
+    color: #ffffff !important;
+}
+
+
+.stat-card i {
+    color: #ffffff !important;
+}
+
+
+/* =====================================================
+   HISTORY CARD
+   ===================================================== */
+
+.history-card {
+    background: #101735 !important;
+
+    border: 1px solid #304b88 !important;
+
+    color: #ffffff !important;
+
+    border-radius: 10px;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer {
+    background: #070b29 !important;
+
+    color: #9eb2dc !important;
+
+    border-top: 1px solid #263b75;
+}
+
+
+/* =====================================================
+   HR
+   ===================================================== */
+
+hr {
+    border-color: #304b88 !important;
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .navbar-brand {
+        font-size: 14px;
+    }
+
+    .table {
+        min-width: 900px;
+    }
+
+}

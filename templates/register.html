@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Register{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-5">
+
+        <div class="card shadow p-4">
+
+            <h2 class="text-center text-primary mb-4">
+                Admin Register
+            </h2>
+
+            {% if error %}
+            <div class="alert alert-danger text-center">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <form action="/register" method="POST">
+
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Confirm Password</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        name="confirm_password"
+                        required>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+                    Register
+                </button>
+
+            </form>
+
+            <div class="text-center mt-3">
+                <a href="/admin">Already have an account? Login</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

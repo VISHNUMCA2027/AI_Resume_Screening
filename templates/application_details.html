@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Application Details - AI Resume Screening</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        body {
+            background: #06112d;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #07152f;
+            border-bottom: 1px solid #1d3965;
+        }
+
+        .navbar-brand {
+            color: #11c8ee !important;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+
+        .nav-link:hover {
+            color: #11c8ee !important;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container-box {
+            max-width: 1000px;
+            margin: 45px auto;
+            padding: 0 15px;
+        }
+
+        /* TITLE */
+
+        .title {
+            text-align: center;
+            color: #11c8ee;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #9fb7db;
+            margin-top: 8px;
+            margin-bottom: 30px;
+        }
+
+        /* CARD */
+
+        .card-box {
+            background: #081a3a;
+            border: 1px solid #1c416e;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* SECTION */
+
+        .section-title {
+            color: #11c8ee;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 1px solid #23456e;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* DETAILS */
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 14px 5px;
+            border-bottom: 1px solid #183657;
+        }
+
+        .label {
+            color: #8da9cf;
+            font-weight: bold;
+        }
+
+        .value {
+            color: white;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        /* RESUME BUTTON */
+
+        .resume-btn {
+            display: inline-block;
+            background: #11c8ee;
+            color: #06112d;
+            padding: 9px 16px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .resume-btn:hover {
+            background: #0caed1;
+            color: #06112d;
+        }
+
+        /* STATUS */
+
+        .selected {
+            color: #20df75;
+            font-weight: bold;
+        }
+
+        .rejected {
+            color: #ff5c6c;
+            font-weight: bold;
+        }
+
+        /* FINAL SCORE */
+
+        .score-box {
+            margin-top: 30px;
+            background: #0b254d;
+            border: 1px solid #1c416e;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .score-label {
+            color: #9db8df;
+            font-size: 16px;
+        }
+
+        .score {
+            color: #20df75;
+            font-size: 42px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        /* SCORE PROGRESS */
+
+        .progress-container {
+            margin-top: 18px;
+        }
+
+        .progress {
+            height: 16px;
+            background: #152e52;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: #20df75;
+            border-radius: 20px;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        /* AI SCORE CARDS */
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .ai-box {
+            background: #0b254d;
+            border: 1px solid #1c416e;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .ai-icon {
+            font-size: 25px;
+            color: #11c8ee;
+            margin-bottom: 8px;
+        }
+
+        .ai-label {
+            color: #9db8df;
+            font-size: 14px;
+        }
+
+        .ai-value {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* SKILLS */
+
+        .skills-container {
+            margin-top: 20px;
+        }
+
+        .skill-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .matched-title {
+            color: #20df75;
+        }
+
+        .missing-title {
+            color: #ff5c6c;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            padding: 7px 12px;
+            margin: 4px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .matched-badge {
+            background: rgba(32, 223, 117, 0.15);
+            color: #20df75;
+            border: 1px solid #20df75;
+        }
+
+        .missing-badge {
+            background: rgba(255, 92, 108, 0.15);
+            color: #ff5c6c;
+            border: 1px solid #ff5c6c;
+        }
+
+        .no-skills {
+            color: #8da9cf;
+            font-size: 14px;
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            background: #243d61;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #31537d;
+            color: white;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .container-box {
+                margin: 25px auto;
+            }
+
+            .card-box {
+                padding: 20px;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 7px;
+            }
+
+            .value {
+                text-align: left;
+            }
+
+            .ai-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="container-fluid px-4">
+
+        <a
+            class="navbar-brand"
+            href="{{ url_for('dashboard') }}"
+        >
+            <i class="fa-solid fa-robot"></i>
+            AI Resume Screening
+        </a>
+
+
+        <div>
+
+            <a
+                class="nav-link d-inline-block me-3"
+                href="{{ url_for('dashboard') }}"
+            >
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+
+
+            <a
+                class="nav-link d-inline-block"
+                href="{{ url_for('logout') }}"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container-box">
+
+    <div class="title">
+
+        <i class="fa-solid fa-file-circle-check"></i>
+
+        Application Details
+
+    </div>
+
+
+    <div class="subtitle">
+
+        Complete AI-powered analysis of this candidate
+
+    </div>
+
+
+    <div class="card-box">
+
+
+        <!-- ================= CANDIDATE INFORMATION ================= -->
+
+        <div class="section-title">
+
+            <i class="fa-solid fa-user"></i>
+
+            Candidate Information
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="label">
+                Application ID
+            </span>
+
+            <span class="value">
+                #{{ candidate[0] }}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="label">
+                Name
+            </span>
+
+            <span class="value">
+                {{ candidate[1] }}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="label">
+                Email
+            </span>
+
+            <span class="value">
+                {{ candidate[2] }}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="label">
+                Phone
+            </span>
+
+            <span class="value">
+                {{ candidate[3] }}
+            </span>
+
+        </div>
+
+
+        <!-- ================= RESUME INFORMATION ================= -->
+
+        <div class="section-title mt-4">
+
+            <i class="fa-solid fa-file-pdf"></i>
+
+            Resume Information
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="label">
+                Resume File
+            </span>
+
+            <span class="value">
+
+                <a
+                    href="{{ url_for('uploaded_file', filename=candidate[4]) }}"
+                    target="_blank"
+                    class="resume-btn"
+                >
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    View Resume
+
+                </a>
+
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="label">
+                File Name
+            </span>
+
+            <span class="value">
+                {{ candidate[4] }}
+            </span>
+
+        </div>
+
+
+        <!-- ================= AI SCREENING ================= -->
+
+        <div class="section-title mt-4">
+
+            <i class="fa-solid fa-brain"></i>
+
+            AI Screening Result
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="detail-row">
+
+            <span class="label">
+                Screening Status
+            </span>
+
+            <span class="value">
+
+                {% if candidate[6] == "Selected" %}
+
+                    <span class="selected">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Selected
+
+                    </span>
+
+                {% else %}
+
+                    <span class="rejected">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        Rejected
+
+                    </span>
+
+                {% endif %}
+
+            </span>
+
+        </div>
+
+
+        <!-- APPLIED DATE -->
+
+        <div class="detail-row">
+
+            <span class="label">
+                Applied At
+            </span>
+
+            <span class="value">
+
+                {% if candidate|length > 7 and candidate[7] %}
+
+                    {{ candidate[7] }}
+
+                {% else %}
+
+                    Date not available
+
+                {% endif %}
+
+            </span>
+
+        </div>
+
+
+        <!-- ================= AI SCORE BREAKDOWN ================= -->
+
+        <div class="ai-grid">
+
+
+            <!-- TF-IDF -->
+
+            <div class="ai-box">
+
+                <div class="ai-icon">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                </div>
+
+                <div class="ai-label">
+
+                    TF-IDF Score
+
+                </div>
+
+                <div class="ai-value">
+
+                    {% if candidate|length > 8 and candidate[8] is not none %}
+
+                        {{ "%.2f"|format(candidate[8]) }}%
+
+                    {% else %}
+
+                        0.00%
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- SKILL SCORE -->
+
+            <div class="ai-box">
+
+                <div class="ai-icon">
+
+                    <i class="fa-solid fa-code"></i>
+
+                </div>
+
+                <div class="ai-label">
+
+                    Skill Match Score
+
+                </div>
+
+                <div class="ai-value">
+
+                    {% if candidate|length > 9 and candidate[9] is not none %}
+
+                        {{ "%.2f"|format(candidate[9]) }}%
+
+                    {% else %}
+
+                        0.00%
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= FINAL SCORE ================= -->
+
+        <div class="score-box">
+
+            <div class="score-label">
+
+                AI Resume Match Score
+
+            </div>
+
+
+            <div class="score">
+
+                {{ "%.2f"|format(candidate[5]) }}%
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div class="progress">
+
+                    <div
+                        id="scoreProgressBar"
+                        class="progress-bar"
+                        role="progressbar"
+                        data-score="{{ candidate[5] }}"
+                        aria-valuenow="{{ candidate[5] }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SKILL ANALYSIS ================= -->
+
+        <div class="section-title mt-4">
+
+            <i class="fa-solid fa-list-check"></i>
+
+            Skill Analysis
+
+        </div>
+
+
+        <div class="skills-container">
+
+
+            <!-- MATCHED SKILLS -->
+
+            <div class="skill-title matched-title">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Matched Skills
+
+            </div>
+
+
+            <div>
+
+                {% if candidate|length > 10 and candidate[10] %}
+
+                    {% for skill in candidate[10].split(',') %}
+
+                        {% if skill.strip() %}
+
+                            <span class="skill-badge matched-badge">
+
+                                <i class="fa-solid fa-check"></i>
+
+                                {{ skill.strip() }}
+
+                            </span>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <span class="no-skills">
+
+                        No matched skills available.
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- MISSING SKILLS -->
+
+            <div class="skill-title missing-title mt-4">
+
+                <i class="fa-solid fa-circle-xmark"></i>
+
+                Missing Skills
+
+            </div>
+
+
+            <div>
+
+                {% if candidate|length > 11 and candidate[11] %}
+
+                    {% for skill in candidate[11].split(',') %}
+
+                        {% if skill.strip() %}
+
+                            <span class="skill-badge missing-badge">
+
+                                <i class="fa-solid fa-xmark"></i>
+
+                                {{ skill.strip() }}
+
+                            </span>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <span class="no-skills">
+
+                        No missing skills detected.
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= BACK BUTTON ================= -->
+
+        <div class="text-center">
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="back-btn"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const progressBar =
+            document.getElementById("scoreProgressBar");
+
+        if (progressBar) {
+
+            let score =
+                parseFloat(progressBar.getAttribute("data-score"));
+
+            if (isNaN(score)) {
+                score = 0;
+            }
+
+            score = Math.max(0, Math.min(100, score));
+
+            setTimeout(function () {
+
+                progressBar.style.width = score + "%";
+
+            }, 100);
+
+        }
+
+    });
+
+</script>
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+</body>
+
+</html>

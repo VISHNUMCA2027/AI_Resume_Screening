@@ -1,0 +1,596 @@
+{% extends "base.html" %}
+
+{% block title %}AI Resume Analysis Result{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- ===================================== -->
+    <!-- TITLE -->
+    <!-- ===================================== -->
+
+    <div class="text-center mb-4">
+
+        <div style="font-size:55px;">
+            🤖
+        </div>
+
+        <h1 class="fw-bold text-primary">
+            AI Resume Screening Result
+        </h1>
+
+        <p class="text-muted">
+            AI-powered resume and job description analysis
+        </p>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- CANDIDATE INFORMATION -->
+    <!-- ===================================== -->
+
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold mb-4">
+                👤 Candidate Information
+            </h4>
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <small class="text-muted">
+                        Candidate Name
+                    </small>
+
+                    <h5 class="fw-bold">
+                        {{ name }}
+                    </h5>
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <small class="text-muted">
+                        Email
+                    </small>
+
+                    <h5 class="fw-bold">
+                        {{ email }}
+                    </h5>
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <small class="text-muted">
+                        Phone
+                    </small>
+
+                    <h5 class="fw-bold">
+                        {{ phone }}
+                    </h5>
+
+                </div>
+
+            </div>
+
+
+            <div class="mt-2">
+
+                <small class="text-muted">
+                    Resume File
+                </small>
+
+                <p class="fw-bold mb-0">
+                    📄 {{ filename }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- AI MATCH SCORE -->
+    <!-- ===================================== -->
+
+    <div class="card shadow border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="text-center">
+
+                <h4 class="fw-bold">
+                    🎯 AI Match Score
+                </h4>
+
+
+                <div class="display-2 fw-bold text-primary my-3">
+
+                    {{ score }}%
+
+                </div>
+
+
+                <div
+                    class="progress"
+                    style="height:30px;"
+                >
+
+                    <div
+                        class="progress-bar
+                        {% if score >= 70 %}
+                            bg-success
+                        {% elif score >= 50 %}
+                            bg-warning
+                        {% else %}
+                            bg-danger
+                        {% endif %}"
+                        role="progressbar"
+                        style="width: {{ score }}%;"
+                        aria-valuenow="{{ score }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    >
+
+                        {{ score }}%
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="mt-4">
+
+                {% if status == "Selected" %}
+
+                    <div class="alert alert-success text-center rounded-3">
+
+                        <h3 class="fw-bold">
+                            ✅ {{ status }}
+                        </h3>
+
+                        <p class="mb-0">
+                            Candidate matches the required job profile.
+                        </p>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="alert alert-danger text-center rounded-3">
+
+                        <h3 class="fw-bold">
+                            ❌ {{ status }}
+                        </h3>
+
+                        <p class="mb-0">
+                            Candidate does not meet the required match score.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- SCORE BREAKDOWN -->
+    <!-- ===================================== -->
+
+    <div class="row mb-4">
+
+
+        <!-- TF-IDF -->
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between">
+
+                        <h5 class="fw-bold">
+                            🧠 TF-IDF Similarity
+                        </h5>
+
+                        <span class="badge bg-primary">
+                            50%
+                        </span>
+
+                    </div>
+
+
+                    <h2 class="fw-bold text-primary mt-3">
+
+                        {{ tfidf_score }}
+
+                    </h2>
+
+
+                    <p class="text-muted mb-0">
+
+                        Measures textual similarity between
+                        the resume and job description.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SKILL SCORE -->
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between">
+
+                        <h5 class="fw-bold">
+                            🛠️ Skill Matching
+                        </h5>
+
+                        <span class="badge bg-success">
+                            50%
+                        </span>
+
+                    </div>
+
+
+                    <h2 class="fw-bold text-success mt-3">
+
+                        {{ skill_score }}
+
+                    </h2>
+
+
+                    <p class="text-muted mb-0">
+
+                        Based on weighted skills required
+                        by the job description.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- MATCHED SKILLS -->
+    <!-- ===================================== -->
+
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold text-success mb-3">
+
+                ✅ Matched Skills
+
+            </h4>
+
+
+            {% if matched_skills %}
+
+                {% for skill in matched_skills %}
+
+                    <span
+                        class="badge bg-success fs-6 me-2 mb-2 p-2"
+                    >
+
+                        {{ skill }}
+
+                    </span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="text-muted">
+
+                    No matching skills found.
+
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- MISSING SKILLS -->
+    <!-- ===================================== -->
+
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold text-danger mb-3">
+
+                ❌ Missing Skills
+
+            </h4>
+
+
+            {% if missing_skills %}
+
+                {% for skill in missing_skills %}
+
+                    <span
+                        class="badge bg-danger fs-6 me-2 mb-2 p-2"
+                    >
+
+                        {{ skill }}
+
+                    </span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="alert alert-success mb-0">
+
+                    🎉 Candidate has all detected required skills.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- REQUIRED SKILLS -->
+    <!-- ===================================== -->
+
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold text-primary mb-3">
+
+                💼 Required Skills Detected
+
+            </h4>
+
+
+            {% if job_skills %}
+
+                {% for skill in job_skills %}
+
+                    <span
+                        class="badge bg-primary fs-6 me-2 mb-2 p-2"
+                    >
+
+                        {{ skill }}
+
+                    </span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="text-muted">
+
+                    No predefined skills detected
+                    in the job description.
+
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- JOB DESCRIPTION -->
+    <!-- ===================================== -->
+
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold text-primary mb-3">
+
+                📋 Job Description
+
+            </h4>
+
+
+            <textarea
+                class="form-control"
+                rows="12"
+                readonly
+            >{{ job_description }}</textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- RESUME CONTENT -->
+    <!-- ===================================== -->
+
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold text-primary mb-3">
+
+                📄 Extracted Resume Content
+
+            </h4>
+
+
+            <textarea
+                class="form-control"
+                rows="18"
+                readonly
+            >{{ resume_text }}</textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- AI RECOMMENDATION -->
+    <!-- ===================================== -->
+
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold mb-3">
+
+                💡 AI Recommendation
+
+            </h4>
+
+
+            {% if score >= 80 %}
+
+                <div class="alert alert-success mb-0">
+
+                    <strong>
+                        Excellent Match!
+                    </strong>
+
+                    <br>
+
+                    The candidate has a strong match
+                    with the job requirements.
+
+                </div>
+
+
+            {% elif score >= 60 %}
+
+                <div class="alert alert-info mb-0">
+
+                    <strong>
+                        Good Match!
+                    </strong>
+
+                    <br>
+
+                    The candidate has several relevant
+                    skills for this position.
+
+                </div>
+
+
+            {% elif score >= 50 %}
+
+                <div class="alert alert-warning mb-0">
+
+                    <strong>
+                        Moderate Match.
+                    </strong>
+
+                    <br>
+
+                    The candidate meets the minimum
+                    screening threshold, but some skills
+                    may need improvement.
+
+                </div>
+
+
+            {% else %}
+
+                <div class="alert alert-danger mb-0">
+
+                    <strong>
+                        Low Match.
+                    </strong>
+
+                    <br>
+
+                    The candidate may need additional
+                    skills or experience for this position.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- BUTTONS -->
+    <!-- ===================================== -->
+
+    <div class="row g-3">
+
+        <div class="col-md-6">
+
+            <a
+                href="/"
+                class="btn btn-primary btn-lg w-100"
+            >
+
+                📤 Upload Another Resume
+
+            </a>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <a
+                href="/admin"
+                class="btn btn-dark btn-lg w-100"
+            >
+
+                🔐 Admin Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

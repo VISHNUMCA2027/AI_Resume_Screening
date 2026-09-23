@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - AI Resume Screening</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050b2d;
+            color: white;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #05091f;
+            border-bottom: 1px solid #26345f;
+            padding: 12px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            color: white;
+        }
+
+        .home-btn {
+            background: #14234d;
+            border: 1px solid #3c5d99;
+        }
+
+        .dashboard-btn {
+            background: #18bcd4;
+            color: #07111f !important;
+        }
+
+        .ranking-btn {
+            background: #ffc107;
+            color: #111 !important;
+        }
+
+        .logout-btn {
+            background: #ff4f73 !important;
+            color: white !important;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.85;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 96%;
+            max-width: 1400px;
+            margin: 25px auto;
+        }
+
+        /* ================= TITLE ================= */
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title-section h1 {
+            margin: 0;
+            font-size: 34px;
+            color: white;
+        }
+
+        .title-section p {
+            margin-top: 10px;
+            color: #c9d3f0;
+            font-size: 13px;
+        }
+
+        /* ================= STAT CARDS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #111a40;
+            border: 1px solid #35518d;
+            border-radius: 7px;
+
+            padding: 25px 15px;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .stat-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 6px;
+            color: white;
+        }
+
+        .total-card {
+            border-color: #35518d;
+        }
+
+        .selected-card {
+            border-color: #35518d;
+        }
+
+        .rejected-card {
+            border-color: #35518d;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            background: #111a40;
+            border: 1px solid #35518d;
+            border-radius: 7px;
+
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        /* ================= QUICK ACTIONS ================= */
+
+        .actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: inline-block;
+
+            padding: 10px 14px;
+
+            border-radius: 5px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            color: white;
+
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
+        }
+
+        .upload-action {
+            background: #18d27d;
+            color: #061b13 !important;
+        }
+
+        .ranking-action {
+            background: #ffc107;
+            color: #111 !important;
+        }
+
+        .selected-action {
+            background: #18c96b;
+            color: #071b12 !important;
+        }
+
+        .rejected-action {
+            background: #ff4b55;
+        }
+
+        .history-action {
+            background: #20bdd6;
+            color: #07131b !important;
+        }
+
+        .export-action {
+            background: #20c997;
+            color: white;
+        }
+
+        /* ================= SEARCH ================= */
+
+        .search-form {
+            display: flex;
+            gap: 0;
+            width: 100%;
+        }
+
+        .search-input {
+            flex: 1;
+
+            background: #080f32;
+
+            border: 1px solid #35518d;
+            border-right: none;
+
+            color: white;
+
+            padding: 11px;
+
+            outline: none;
+
+            border-radius: 5px 0 0 5px;
+
+            font-size: 12px;
+        }
+
+        .search-input::placeholder {
+            color: #aab5d5;
+        }
+
+        .search-input:focus {
+            border-color: #20bdd6;
+        }
+
+        .search-btn {
+            background: #20bdd6;
+
+            border: none;
+
+            color: #07131b;
+
+            font-weight: bold;
+
+            padding: 0 20px;
+
+            border-radius: 0 5px 5px 0;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+        .search-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            min-width: 1100px;
+        }
+
+        thead {
+            background: #17234e;
+        }
+
+        th {
+            color: #20c9e5;
+
+            font-size: 11px;
+
+            padding: 11px 8px;
+
+            border: 1px solid #304675;
+
+            text-align: left;
+        }
+
+        td {
+            padding: 11px 8px;
+
+            border: 1px solid #304675;
+
+            font-size: 11px;
+
+            color: #f2f5ff;
+        }
+
+        tbody tr {
+            background: #0c1437;
+        }
+
+        tbody tr:hover {
+            background: #121e4b;
+        }
+
+        /* ================= SCORE ================= */
+
+        .score-container {
+            width: 100px;
+        }
+
+        .score-text {
+            color: #19e58a;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .score-bar {
+            width: 100%;
+            height: 5px;
+
+            background: #253457;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+
+            background: #18df83;
+
+            border-radius: 10px;
+        }
+
+        /* ================= STATUS ================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 5px 8px;
+
+            border-radius: 12px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+        .status-selected {
+            color: #18e67f;
+        }
+
+        .status-rejected {
+            color: #ff4d57;
+        }
+
+        /* ================= RESUME ================= */
+
+        .resume-link {
+            color: #21c9e7;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        .resume-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= DETAILS ================= */
+
+        .details-btn {
+            display: inline-block;
+
+            background: #20bdd6;
+
+            color: #06131a;
+
+            text-decoration: none;
+
+            padding: 6px 10px;
+
+            border-radius: 4px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+        .details-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #aab5d5;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            color: #8e9abb;
+
+            font-size: 11px;
+
+            padding: 20px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                justify-content: center;
+            }
+
+            .brand {
+                width: 100%;
+                text-align: center;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 94%;
+            }
+
+            .title-section h1 {
+                font-size: 26px;
+            }
+
+            .search-form {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .search-input {
+                border-right: 1px solid #35518d;
+                border-radius: 5px;
+            }
+
+            .search-btn {
+                padding: 11px;
+                border-radius: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="brand">
+            🤖 AI Resume Screening System
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/home" class="home-btn">
+                🏠 Home
+            </a>
+
+            <a href="/dashboard" class="dashboard-btn">
+                📊 Dashboard
+            </a>
+
+            <a href="/ranking" class="ranking-btn">
+                🏆 Ranking
+            </a>
+
+            <a href="/logout" class="logout-btn">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+        <!-- TITLE -->
+
+        <div class="title-section">
+
+            <h1>
+                📊 Dashboard
+            </h1>
+
+            <p>
+                AI Resume Screening System - Candidate Management Dashboard
+            </p>
+
+        </div>
+
+        <!-- ================= STATISTICS ================= -->
+
+        <div class="stats">
+
+            <!-- TOTAL -->
+
+            <div class="stat-card total-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div class="stat-title">
+                    Total Candidates
+                </div>
+
+                <div class="stat-number">
+                    {{ total }}
+                </div>
+
+            </div>
+
+            <!-- SELECTED -->
+
+            <div class="stat-card selected-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div class="stat-title">
+                    Selected Candidates
+                </div>
+
+                <div class="stat-number">
+                    {{ selected }}
+                </div>
+
+            </div>
+
+            <!-- REJECTED -->
+
+            <div class="stat-card rejected-card">
+
+                <div class="stat-icon">
+                    ❌
+                </div>
+
+                <div class="stat-title">
+                    Rejected Candidates
+                </div>
+
+                <div class="stat-number">
+                    {{ rejected }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <div class="section">
+
+            <div class="section-title">
+                ⚡ Quick Actions
+            </div>
+
+            <div class="actions">
+
+                <!-- UPLOAD -->
+
+                <a
+                    href="/home"
+                    class="action-btn upload-action">
+
+                    📄 Upload Resume
+
+                </a>
+
+                <!-- RANKING -->
+
+                <a
+                    href="/ranking"
+                    class="action-btn ranking-action">
+
+                    🏆 Candidate Ranking
+
+                </a>
+
+                <!-- SELECTED -->
+
+                <a
+                    href="/selected"
+                    class="action-btn selected-action">
+
+                    ✅ Selected Candidates
+
+                </a>
+
+                <!-- REJECTED -->
+
+                <a
+                    href="/rejected"
+                    class="action-btn rejected-action">
+
+                    ❌ Rejected Candidates
+
+                </a>
+
+                <!-- HISTORY -->
+
+                <a
+                    href="/application-history"
+                    class="action-btn history-action">
+
+                    ↩ Application History
+
+                </a>
+
+                <!-- EXPORT -->
+
+                <a
+                    href="/export"
+                    class="action-btn export-action">
+
+                    📥 Export Candidates
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- ================= SEARCH ================= -->
+
+        <div class="section">
+
+            <div class="section-title">
+                🔍 Search Candidates
+            </div>
+
+            <form
+                method="GET"
+                action="/dashboard/search"
+                class="search-form">
+
+                <input
+                    type="text"
+                    name="q"
+                    class="search-input"
+
+                    placeholder="Search by name, email, phone or resume..."
+
+                    value="{{ request.args.get('q', '') }}"
+                >
+
+                <button
+                    type="submit"
+                    class="search-btn">
+
+                    🔍 Search
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ================= CANDIDATE OVERVIEW ================= -->
+
+        <div class="section">
+
+            <div class="section-title">
+                👥 Candidate Overview
+            </div>
+
+            {% if candidates %}
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Name</th>
+
+                            <th>Email</th>
+
+                            <th>Phone</th>
+
+                            <th>Resume</th>
+
+                            <th>AI Match Score</th>
+
+                            <th>Status</th>
+
+                            <th>Applied At</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for candidate in candidates %}
+
+                        <tr>
+
+                            <!-- NUMBER -->
+
+                            <td>
+                                {{ loop.index }}
+                            </td>
+
+                            <!-- NAME -->
+
+                            <td>
+                                <strong>
+                                    {{ candidate[1] }}
+                                </strong>
+                            </td>
+
+                            <!-- EMAIL -->
+
+                            <td>
+                                {{ candidate[2] }}
+                            </td>
+
+                            <!-- PHONE -->
+
+                            <td>
+                                {{ candidate[3] }}
+                            </td>
+
+                            <!-- RESUME -->
+
+                            <td>
+
+                                {% if candidate[4] %}
+
+                                <a
+                                    href="/uploads/{{ candidate[4] }}"
+                                    target="_blank"
+                                    class="resume-link">
+
+                                    📄 {{ candidate[4] }}
+
+                                </a>
+
+                                {% else %}
+
+                                N/A
+
+                                {% endif %}
+
+                            </td>
+
+                            <!-- AI SCORE -->
+
+                            <td>
+
+                                <div class="score-container">
+
+                                    <div class="score-text">
+
+                                        {{ "%.2f"|format(candidate[5]) }}%
+
+                                    </div>
+
+                                    <div class="score-bar">
+
+                                        <div
+                                            class="score-fill"
+
+                                            style="width: {{ candidate[5] }}%;">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if candidate[6] == "Selected" %}
+
+                                <span class="status status-selected">
+                                    🟢 Selected
+                                </span>
+
+                                {% else %}
+
+                                <span class="status status-rejected">
+                                    🔴 Rejected
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <!-- APPLIED AT -->
+
+                            <td>
+
+                                {% if candidate[7] %}
+
+                                {{ candidate[7] }}
+
+                                {% else %}
+
+                                Not Available
+
+                                {% endif %}
+
+                            </td>
+
+                            <!-- DETAILS -->
+
+                            <td>
+
+                                <a
+                                    href="/application-details/{{ candidate[0] }}"
+                                    class="details-btn">
+
+                                    👁 Details
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty">
+
+                <h3>
+                    No Candidates Found
+                </h3>
+
+                <p>
+                    There are no candidate applications available.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        AI Resume Screening System © 2026
+
+    </footer>
+
+</body>
+
+</html>
